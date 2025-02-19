@@ -6,7 +6,7 @@
 from setuptools import setup
 
 
-with open("esm/version.py") as infile:
+with open("esm2/version.py") as infile:
     exec(infile.read())
 
 with open("README.md") as f:
@@ -26,31 +26,31 @@ extras = {
 }
 
 sources = {
-    "esm": "esm",
-    "esm.model": "esm/model",
-    "esm.inverse_folding": "esm/inverse_folding",
-    "esm.esmfold.v1": "esm/esmfold/v1",
-    "esm.scripts": "scripts"
+    "esm2": "esm2",
+    "esm2.model": "esm2/model",
+    "esm2.inverse_folding": "esm2/inverse_folding",
+    "esm2.esmfold.v1": "esm2/esmfold/v1",
+    "esm2.scripts": "scripts"
 }
 
 setup(
-    name="fair-esm",
+    name="fair-esm2",
     version=version,
-    description="Evolutionary Scale Modeling (esm): Pretrained language models for proteins. From Facebook AI Research.",
+    description="Evolutionary Scale Modeling (esm2): Pretrained language models for proteins. From Facebook AI Research.",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Facebook AI Research",
-    url="https://github.com/facebookresearch/esm",
+    url="https://github.com/facebookresearch/esm2",
     license="MIT",
     packages=sources.keys(),
     package_dir=sources,
     extras_require=extras,
-    data_files=[("source_docs/esm", ["LICENSE", "README.md", "CODE_OF_CONDUCT.rst"])],
+    data_files=[("source_docs/esm2", ["LICENSE", "README.md", "CODE_OF_CONDUCT.rst"])],
     zip_safe=True,
     entry_points={
         "console_scripts": [
-            "esm-extract=esm.scripts.extract:main",
-            "esm-fold=esm.scripts.fold:main",
+            "esm2-extract=esm2.scripts.extract:main",
+            "esm2-fold=esm2.scripts.fold:main",
         ]
     },
 )
