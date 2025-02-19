@@ -13,7 +13,7 @@ import numpy as np
 from pathlib import Path
 import torch
 
-import esm
+import esm2
 import esm.inverse_folding
 
 

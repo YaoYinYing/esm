@@ -6,7 +6,7 @@
 import pytest
 from pathlib import Path
 import torch
-import esm
+import esm2
 
 # Directly from hubconf.py
 model_names = """

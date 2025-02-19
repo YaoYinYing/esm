@@ -7,7 +7,7 @@ from typing import Union
 import torch
 import torch.nn as nn
 
-import esm
+import esm2
 from esm2.modules import ContactPredictionHead, ESM1bLayerNorm, RobertaLMHead, TransformerLayer
 
 

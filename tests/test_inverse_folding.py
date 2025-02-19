@@ -12,7 +12,7 @@ def test_esm_if1():
     from tqdm import tqdm
     import torch
     
-    import esm
+    import esm2
     import esm.inverse_folding
 
     example_file = Path(__file__).absolute().parent / "inverse_folding_test_example.json"

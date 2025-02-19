@@ -15,7 +15,7 @@ from timeit import default_timer as timer
 
 import torch
 
-import esm
+import esm2
 from esm2.data import read_fasta
 
 logger = logging.getLogger()

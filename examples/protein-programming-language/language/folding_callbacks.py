@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from io import StringIO
 from typing import List
 
-import esm
+import esm2
 import torch
 from biotite.structure import AtomArray
 import numpy as np

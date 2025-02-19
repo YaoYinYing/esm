@@ -11,7 +11,7 @@ from pathlib import Path
 
 import torch
 
-import esm
+import esm2
 from esm2.model.esm2 import ESM2
 
 
