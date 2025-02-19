@@ -12,7 +12,7 @@ from torch import nn
 from torch.nn import LayerNorm
 
 import esm2
-from esm import Alphabet
+from esm2 import Alphabet
 from esm2.esmfold.v1.categorical_mixture import categorical_lddt
 from esm2.esmfold.v1.misc import (
     batch_encode_sequences,

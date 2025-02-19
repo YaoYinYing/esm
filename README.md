@@ -98,7 +98,7 @@ For transformer protein language models:
 
 ## Main models you should use <a name="main-models"></a>
 
-| Shorthand | `esm.pretrained.`           | Dataset | Description  |
+| Shorthand | `esm2.pretrained.`           | Dataset | Description  |
 |-----------|-----------------------------|---------|--------------|
 | ESM-2    | `esm2_t36_3B_UR50D()` `esm2_t48_15B_UR50D()`       | UR50 (sample UR90)  | SOTA general-purpose protein language model. Can be used to predict structure, function and other protein properties directly from individual sequences. Released with [Lin et al. 2022](https://www.science.org/doi/abs/10.1126/science.ade2574) (Aug 2022 update). |
 | ESMFold   | `esmfold_v1()`         | PDB + UR50 | End-to-end single sequence 3D structure predictor (Nov 2022 update). |
@@ -134,7 +134,7 @@ You can use this one-liner for installation, using the latest release of esm:
 
 ```bash
 pip install fair-esm  # latest release, OR:
-pip install git+https://github.com/facebookresearch/esm.git  # bleeding edge, current repo main branch
+pip install git+https://github.com/facebookresearch/esm2.git  # bleeding edge, current repo main branch
 ```
 
 To use the ESMFold model, make sure you start from an environment with python <= 3.9 and pytorch installed.
@@ -163,10 +163,10 @@ After pip install, you can load and use a pretrained model as follows:
 
 ```python
 import torch
-import esm
+import esm2
 
 # Load ESM-2 model
-model, alphabet = esm.pretrained.esm2_t33_650M_UR50D()
+model, alphabet = esm2.pretrained.esm2_t33_650M_UR50D()
 batch_converter = alphabet.get_batch_converter()
 model.eval()  # disables dropout for deterministic results
 
@@ -206,9 +206,9 @@ After installing with the `[esmfold]` option, you can use the ESMFold structure 
 
 ```python
 import torch
-import esm
+import esm2
 
-model = esm.pretrained.esmfold_v1()
+model = esm2.pretrained.esmfold_v1()
 model = model.eval().cuda()
 
 # Optionally, uncomment to set a chunk size for axial attention. This can help reduce memory.
@@ -231,8 +231,8 @@ print(struct.b_factor.mean())  # this will be the pLDDT
 ```
 
 
-Besides `esm.pretrained.esmfold_v1()` which is the best performing model we recommend using, we
-also provide `esm.pretrained.esmfold_v0()` which was used for the experiments in
+Besides `esm2.pretrained.esmfold_v1()` which is the best performing model we recommend using, we
+also provide `esm2.pretrained.esmfold_v0()` which was used for the experiments in
 [Lin et al. 2022](https://www.science.org/doi/abs/10.1126/science.ade2574).
 
 We also provide a command line interface (`esm-fold`) that efficiently predicts structures in bulk from a FASTA file using ESMFold:
@@ -270,7 +270,7 @@ By default, predictions will be batched together so that shorter sequences are p
 
 The `--cpu-offload` flag can be useful for making predictions on longer sequences. It will attempt to offload some parameters to the CPU RAM, rather than storing on GPU.
 
-Finally, the ablation experiments for LMs of varying sizes [Lin et al. 2022 table S1](https://www.science.org/doi/abs/10.1126/science.ade2574) are released as `esm.pretrained.esmfold_structure_module_only_*()`. We don't recommend using these models for structure prediction.
+Finally, the ablation experiments for LMs of varying sizes [Lin et al. 2022 table S1](https://www.science.org/doi/abs/10.1126/science.ade2574) are released as `esm2.pretrained.esmfold_structure_module_only_*()`. We don't recommend using these models for structure prediction.
 
 
 ### Compute embeddings in bulk from FASTA <a name="bulk_fasta"></a>
@@ -472,7 +472,7 @@ and computes the self-attention map unsupervised contact predictions using ESM-2
 
 ### Pre-trained Models <a name="available-models"></a>
 
-| Shorthand | `esm.pretrained.`           | #layers | #params | Dataset | Embedding Dim |  Model URL (automatically downloaded to `~/.cache/torch/hub/checkpoints`) |
+| Shorthand | `esm2.pretrained.`           | #layers | #params | Dataset | Embedding Dim |  Model URL (automatically downloaded to `~/.cache/torch/hub/checkpoints`) |
 |-----------|---------------------|---------|-------------|---------|---------------|-----------------------------------------------------------------------|
 | ESM-2     | `esm2_t48_15B_UR50D`         | 48           | 15B         | UR50/D 2021_04                           | 5120 |  https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t48_15B_UR50D.pt          |
 |           | `esm2_t36_3B_UR50D`          | 36           | 3B          | UR50/D 2021_04                           | 2560 |  https://dl.fbaipublicfiles.com/fair-esm/models/esm2_t36_3B_UR50D.pt           |

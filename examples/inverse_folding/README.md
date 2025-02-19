@@ -29,7 +29,7 @@ conda install pytorch cudatoolkit=11.3 -c pytorch
 conda install pyg -c pyg -c conda-forge
 conda install pip
 pip install biotite
-pip install git+https://github.com/facebookresearch/esm.git
+pip install git+https://github.com/facebookresearch/esm2.git
 ```
 
 ## Quickstart
@@ -122,8 +122,8 @@ tokens encoded by the model.
 dropout from training mode for best performance.
 
 ```
-import esm.inverse_folding
-model, alphabet = esm.pretrained.esm_if1_gvp4_t16_142M_UR50()
+import esm2.inverse_folding
+model, alphabet = esm2.pretrained.esm_if1_gvp4_t16_142M_UR50()
 model = model.eval()
 ```
 
@@ -139,17 +139,17 @@ be of shape L x 3 x 3, where L is the number of amino acids in the structure.
 To load a single chain from PDB and mmCIF file formats and extract the backbone
 coordinates of the N, CA, C atoms as model input,
 ```
-import esm.inverse_folding
-structure = esm.inverse_folding.util.load_structure(fpath, chain_id)
-coords, seq = esm.inverse_folding.util.extract_coords_from_structure(structure)
+import esm2.inverse_folding
+structure = esm2.inverse_folding.util.load_structure(fpath, chain_id)
+coords, seq = esm2.inverse_folding.util.extract_coords_from_structure(structure)
 ```
 Note this only loads the specified chain.
 
 To load multiple chains for the multichain complex use cases, list all chain ids
 when loading the structure, e.g. `chain_ids = ['A', 'B', 'C']`:
 ```
-structure = esm.inverse_folding.util.load_structure(fpath, chain_ids)
-coords, native_seqs = esm.inverse_folding.multichain_util.extract_coords_from_complex(structure)
+structure = esm2.inverse_folding.util.load_structure(fpath, chain_ids)
+coords, native_seqs = esm2.inverse_folding.multichain_util.extract_coords_from_complex(structure)
 ```
 
 ### Example Jupyter notebook
@@ -177,8 +177,8 @@ where `coords` is an array as described in the above section on input format.
 
 To sample sequences for a given chain in a multichain complex,
 ```
-import esm.inverse_folding
-sampled_seq = esm.inverse_folding.multichain_util.sample_sequence_in_complex(
+import esm2.inverse_folding
+sampled_seq = esm2.inverse_folding.multichain_util.sample_sequence_in_complex(
     model, coords, target_chain_id, temperature=T
 )
 ```
@@ -194,7 +194,7 @@ recovery, we recommend sampling with low temperature such as `T=1e-6`.
 To score the conditional log-likelihoods for sequences conditioned on a given
 set of backbone coordinates for a single chain, use the `score_sequence` function,
 ```
-ll_fullseq, ll_withcoord = esm.inverse_folding.util.score_sequence(model, alphabet, coords, seq)
+ll_fullseq, ll_withcoord = esm2.inverse_folding.util.score_sequence(model, alphabet, coords, seq)
 ```
 
 The first returned value ``ll_fullseq`` is the average log-likelihood averaged
@@ -205,7 +205,7 @@ missing backbone coordinates.
 
 For multichain complexes,
 ```
-ll_fullseq, ll_withcoord = esm.inverse_folding.multichain_util.score_sequence_in_complex(
+ll_fullseq, ll_withcoord = esm2.inverse_folding.multichain_util.score_sequence_in_complex(
     model, alphabet, coords, target_chain_id, target_seq
 )
 ```
@@ -222,14 +222,14 @@ coords[:10, :] = float('inf')
 ### Encoder output as structure representation
 To extract the encoder output as structure representation,
 ```
-rep = esm.inverse_folding.util.get_encoder_output(model, alphabet, coords)
+rep = esm2.inverse_folding.util.get_encoder_output(model, alphabet, coords)
 ```
 For a set of input coordinates with L amino acids, the encoder output will have
 shape L x 512.
 
 Or, for multichain complex,
 ```
-rep = esm.inverse_folding.multichain_util.get_encoder_output_for_complex(
+rep = esm2.inverse_folding.multichain_util.get_encoder_output_for_complex(
     model, alphabet, coords, target_chain_id
 )
 ```
