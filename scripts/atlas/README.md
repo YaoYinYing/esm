@@ -9,7 +9,7 @@ An update `v2023_02` was released on March 17th 2023, corresponding to the seque
 
 Here we provide bulk download instructions for the tarballs of predicted structures, as well as foldseek databases, and LM embeddings for every sequence in the Atlas.
 
-The structures in the ESM Metagenomic Atlas were predicted with `esm.pretrained.esmfold_v0()` for Atlas `v0`, while Atlas `v2023_02` used `esm.pretrained.esmfold_v1()`.
+The structures in the ESM Metagenomic Atlas were predicted with `esm2.pretrained.esmfold_v0()` for Atlas `v0`, while Atlas `v2023_02` used `esm2.pretrained.esmfold_v1()`.
 We find that protein structures with predicted LDDT > 0.7 and predict TM > 0.7 to be both reasonably well structured and interesting.
 Therefore, we provide both the small set of "high confidence" metagenomic structures from Atlas `v0`, as well as the full set.
 The small set of structures is built from taking a 30% sequence identity clustering of MGnify90 `2022_05`, and using the best structure from each cluster.
@@ -30,7 +30,7 @@ This dataframe has 10 columns:
 - `len` is the total residues in the protein
 - `is_fragment` indicates whether the protein sequence is identified as a fragment in the MGnify90 sequence database.
 - `sequenceChecksum` is the CRC64 hash of the sequence. Can be used for cheaper lookups.
-- `esmfold_version` is the version of ESMFold, matching the model accessible as `esm.pretrained.esmfold_v{0,1}`
+- `esmfold_version` is the version of ESMFold, matching the model accessible as `esm2.pretrained.esmfold_v{0,1}`
 - `atlas_version` is the Atlas version where this structure first appeared. Note: some of the predictions appearing for the first time in `v0` are also part of Atlas `v2023_02`.
 - `sequence_dbs` is the metagenomic source databases where this structure is part of, as `MGnify90_2022_05`, comma-separated if it exists in more than one release, as `MGnify90_2022_05,MGnify90_2023_02`.
 
