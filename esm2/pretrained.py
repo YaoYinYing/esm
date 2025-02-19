@@ -83,7 +83,7 @@ def has_emb_layer_norm_before(model_state):
 
 
 def _load_model_and_alphabet_core_v1(model_data):
-    import esm  # since esm.inverse_folding is imported below, you actually have to re-import esm here
+    import esm2  # since esm.inverse_folding is imported below, you actually have to re-import esm here
 
     alphabet = esm.Alphabet.from_architecture(model_data["args"].arch)
 
