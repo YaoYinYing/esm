@@ -27,7 +27,7 @@ def _load_model(model_name):
 
     missing_essential_keys = []
     for missing_key in expected_keys - found_keys:
-        if not missing_key.startswith("esm."):
+        if not missing_key.startswith("esm2."):
             missing_essential_keys.append(missing_key)
 
     if missing_essential_keys:

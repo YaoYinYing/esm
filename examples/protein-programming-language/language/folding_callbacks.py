@@ -49,13 +49,13 @@ class EsmFoldv1(FoldingCallback):
         self.model = None
 
     def load(self, device: str) -> None:
-        self.model = esm.pretrained.esmfold_v1().eval()
+        self.model = esm2.pretrained.esmfold_v1().eval()
         self.model = self.model.to(device)
 
     def fold(self, sequence: str, residue_indices: List[int]) -> FoldingResult:
         assert self.model is not None, "Must call load() before fold()."
 
-        # TODO: Current `esm.esmfold.v1.misc.output_to_pdb()` adds 1 to the `residx`
+        # TODO: Current `esm2.esmfold.v1.misc.output_to_pdb()` adds 1 to the `residx`
         # mistakenly, just subtract 1 for now but fix in a later version.
         residue_indices = np.array(residue_indices) - 1
 
@@ -64,7 +64,7 @@ class EsmFoldv1(FoldingCallback):
         )
         raw_output = tree_map(lambda x: x.to("cpu"), raw_output)
 
-        pdb_string = esm.esmfold.v1.misc.output_to_pdb(raw_output)[0]
+        pdb_string = esm2.esmfold.v1.misc.output_to_pdb(raw_output)[0]
         atoms: AtomArray = pdb_file_to_atomarray(StringIO(pdb_string))
 
         plddt = raw_output["plddt"]
